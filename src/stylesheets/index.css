@@ -1,7 +1,33 @@
+html {
+  font-family: sans-serif;
+}
+
 #canvas {
   background: pink;
 }
 
 #canvas:focus {
   outline: none;
+}
+
+#options-section {
+  width: 100px;
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#options-button {
+  font-size: 20px;
+}
+
+#options-pane {
+  color: white;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
 }
