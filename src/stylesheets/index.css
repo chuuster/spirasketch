@@ -1,0 +1,7 @@
+#canvas {
+  background: pink;
+}
+
+#canvas:focus {
+  outline: none;
+}
