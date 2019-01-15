@@ -3,32 +3,30 @@ html {
 }
 
 #canvas {
+
 }
 
 #canvas:focus {
   outline: none;
 }
 
-#options-section {
-  width: 100px;
-  position: absolute;
-  right: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 #options-button {
   font-size: 20px;
 }
 
+#options-section {
+  min-width: 200px;
+  position: absolute;
+  right: 0px;
+}
+
 #options-pane {
   display: none;
+  max-height: 90vh;
   overflow: auto;
   color: white;
   background: rgba(0,0,0,0.5);
-  padding: 10px;
-  top: 100px;
+  padding: 15px;
 }
 
 #options-section .show {
@@ -36,10 +34,72 @@ html {
   flex-direction: column;
 }
 
-#draw-button, #clear-button {
-  background: rgba(0,0,0,0.9);
+#options-pane .show {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-#draw-button:hover, #clear-button:hover {
+#options-pane section {
+  border-top: 1px solid whitesmoke;
+}
+
+#options-pane > :first-child {
+  border-top: none;
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.randomize-button {
+  width: 80%;
+  border: 2px solid darkgrey;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.randomize-button:hover, .anidraw-button:hover {
   cursor: pointer;
+  background: darkgrey;
+}
+
+.section-header-span {
+  margin: 10px;
+}
+
+.section-end {
+  margin: 10px;
+}
+
+.anidraw-button {
+  border: 2px solid darkgrey;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+
+
+
+#radii-section, #ratio-section {
+  display: flex;
+  flex-direction: column;
+}
+
+#radii-section label, #ratio-section label {
+  margin-top: 15px;
+  display: flex;
+  justify-items: space-between;
 }

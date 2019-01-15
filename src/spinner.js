@@ -8,7 +8,6 @@ export class Spinner {
     this.end_y = start_y + (radius * Math.sin(theta));
     this.radius = radius;
     this.theta = theta;
-    // this.spinSpinner = this.spinSpinner.bind(this);
   }
 
   drawSpinner() {
@@ -18,13 +17,4 @@ export class Spinner {
     ctx.strokeStyle = "#FF0000";
     ctx.stroke();
   }
-
-  // spinSpinner() {
-  //   if (this.theta <= (2 * Math.PI) + 0.01) {
-  //     clearCanvas();
-  //     this.theta += 0.01;
-  //     this.drawSpinner();
-  //   }
-  //   window.requestAnimationFrame(this.spinSpinner);
-  // }
 }

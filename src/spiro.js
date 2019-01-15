@@ -20,12 +20,12 @@ export class Spirograph {
   }
 
   xyOffset(theta) {
-    let xOffset = this.radii[0] * Math.cos(theta);
-    let yOffset = this.radii[0] * Math.sin(theta);
+    let xOffset = this.radii[0] * Math.cos(theta * this.ratio[0]);
+    let yOffset = this.radii[0] * Math.sin(theta * this.ratio[0]);
 
     for(let i = 1; i < this.radii.length; i++) {
-      xOffset += this.radii[i] * (Math.cos(theta * this.ratio));
-      yOffset += this.radii[i] * (Math.sin(theta * this.ratio));
+      xOffset += this.radii[i] * (Math.cos(theta * this.ratio[i]));
+      yOffset += this.radii[i] * (Math.sin(theta * this.ratio[i]));
     }
 
     return [xOffset, yOffset];
@@ -33,11 +33,11 @@ export class Spirograph {
 
   createSpinners() {
     let spinners = [];
-    spinners.push(new Spinner(this.cx, this.cy, this.radii[0], this.thetaLimit));
+    spinners.push(new Spinner(this.cx, this.cy, this.radii[0], this.thetaLimit * this.ratio[0]));
 
     for(let i = 1; i < this.radii.length; i++) {  
       spinners.push(
-        new Spinner(spinners[i-1].end_x, spinners[i-1].end_y, this.radii[i], this.thetaLimit * this.ratio)
+        new Spinner(spinners[i-1].end_x, spinners[i-1].end_y, this.radii[i], this.thetaLimit * this.ratio[i])
       );
     }
 
@@ -63,18 +63,18 @@ export class Spirograph {
   }
 
   animateSpirograph() {
-    window.stopAnimation = false;
-    if (this.thetaLimit <= 2 * Math.PI) {
-      clearCanvas();
-      this.thetaLimit += 0.01;
-      this.drawSpirograph();
-      this.createSpinners().forEach((spinner) => {
-        spinner.drawSpinner();
-      });
-    }
-    
     if (!window.stopAnimation) {
-      let window.animationFrameId = window.requestAnimationFrame(this.animateSpirograph);
+
+      if (this.thetaLimit <= 2 * Math.PI) {
+        clearCanvas();
+        this.thetaLimit += 0.01;
+        this.drawSpirograph();
+        this.createSpinners().forEach((spinner) => {
+          spinner.drawSpinner();
+        });
+      }
+      
+      window.animationFrameId = window.requestAnimationFrame(this.animateSpirograph);
     }
   }
 }

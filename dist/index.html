@@ -12,32 +12,55 @@
           Options
         </div>
         <div id="options-pane">
-          <label>
-            Number of Rotors
-            <input id="num-rotors" type="number" min="1" max="9"/>
-          </label>
+          <section class="column-flex" id="randomize-buttons-section">
+            <div class="randomize-button" id="randomize-simple-button">Randomize! (simple)</div>
+            <div class="randomize-button" id="randomize-spirals-button">Randomize! (spirals)</div>
+            <div class="randomize-button" id="randomize-complex-button">Randomize! (complex)</div>
+          </section>
 
-          <div id="radii-section"></div>
+          <section class="column-flex" id="mode-section">
+            <span class="section-header-span">Mode:</span>
+            <div class="row-flex section-end" id="mode-options-section">
+              <label for="draw-mode-radio">Draw</label>
+              <input type="radio" id="draw-mode-radio" name="mode" value="draw" />
+              <label for="draw-mode-radio">Animate</label>
+              <input type="radio" id="animation-mode-radio" name="mode" value="animation" checked/>
+            </div>
+          </section>
+            
+          <section class="row-flex" id="animation-section">
+            <div class="anidraw-button" id="animation-play-button">Play</div>
+            <div class="anidraw-button" id="animation-pause-button">Pause</div>
+            <div class="anidraw-button" id="animation-clear-button">Clear</div>
+          </section>
+
+          <section class="row-flex" id="draw-section">
+            <div class="anidraw-button" id="draw-start-button">Draw</div>
+            <div class="anidraw-button" id="draw-clear-button">Clear</div>
+          </section>
+
+          <section class="section-end" id="spinner-section">
+            <div id="spinner-mode">
+              <input type="checkbox" id="spinner-mode-checkbox" name="spinner-mode" checked>
+              <label for="spinner-mode-checkbox">Show Spinner</label>
+            </div>
+          </section>
           
-          <label for="ratio">
-            Ratio
-            <input id="ratio" type="number" />
-          </label>
-          
-          <div id="draw-clear-section">
-            <div id="draw-button">
-              Draw
+          <section id="advanced-options-section">
+            <div id="num-rotors-section">
+              <label>
+                <span>Number of Rotors</span>
+                <input id="num-rotors" type="number" min="1" max="9"/>
+              </label>
             </div>
-            <div id="clear-button">
-              Clear
-            </div>
-            <div id="animate-button">
-              Animate
-            </div>
-          </div>
+            
+            <div id="radii-section"></div>
+            <div id="ratio-section"></div>
+          </section>
         </div>
       </div>
-      
+      </div>
+
       <canvas id="canvas"></canvas>
     </div>
   </body>
