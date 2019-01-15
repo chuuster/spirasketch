@@ -43,29 +43,62 @@ export const drawOnCanvas = (animate = false) => {
   }
 };
 
-// Randomize spirograph on click 
-canvasEl.addEventListener("click", () => {
-  
+const stopAnimation = () => {
+  if (window.animationFrameId) {
+    window.cancelAnimationFrame(window.animationFrameId);
+  }
+  window.stopAnimation = true;
+};
+
+// Randomize Button listeners 
+
+const randomize = ({minRotor, maxRotor, maxRatio}) => {
   // Fill out form element with randomized values 
-  numRotorsEl.value = Math.floor(Math.random() * 9) + 2;
+  numRotorsEl.value = Math.floor(Math.random() * (maxRotor - minRotor + 1)) + minRotor;
   numRotorsEl.dispatchEvent(new Event("input"));
-  
   let numRadii = parseInt(numRotorsEl.value);
-  
+
   for (let i = 1; i <= numRadii; i++) {
     document.getElementById(`radius${i}`).value = Math.floor(Math.random() * canvasEl.height / (2 * numRadii) + 10);
-    document.getElementById(`ratio${i}`).value = Math.floor(Math.random() * 10);
+    document.getElementById(`ratio${i}`).value = Math.floor(Math.random() * maxRatio) + 1;
   }
-  
+
   // Draw on canvas 
-  drawOnCanvas();
+  if (document.getElementById("draw-mode-radio").checked) {
+    drawOnCanvas();
+  } else {
+    window.stopAnimation = false;
+    drawOnCanvas(true);
+  }
+};
+
+let randomSimple = document.getElementById("randomize-simple-button");
+let randomSpiral = document.getElementById("randomize-spirals-button");
+let randomComplex = document.getElementById("randomize-complex-button");
+
+randomSimple.addEventListener("click", () => {
+  stopAnimation();
+  clearCanvas();
+  randomize({minRotor: 2, maxRotor: 6, maxRatio: 8});
+});
+
+randomSpiral.addEventListener("click", () => {  
+  stopAnimation();
+  clearCanvas();
+  randomize({minRotor: 2, maxRotor: 2, maxRatio: 100000000});
+});
+
+randomComplex.addEventListener("click", () => {  
+  stopAnimation();
+  clearCanvas();
+  randomize({ minRotor: 4, maxRotor: 9, maxRatio: 100000000});
 });
 
 
 // Options Display Toggle 
 
 const optionsButton = document.getElementById("options-button");
-const optionsPane = document.getElementById("options-pane");
+const optionsPane = document.getElementById("scroll-container");
 
 optionsButton.addEventListener("click", () => {
   optionsPane.classList.toggle("show");
@@ -77,8 +110,8 @@ numRotorsEl.addEventListener("input", () => {
   let numRotors = parseInt(numRotorsEl.value) || 0;
   let radiiSection = document.getElementById("radii-section");
   let ratioSection = document.getElementById("ratio-section");
-  let numRadiiInput = radiiSection.childElementCount;
-  let numRatioInput = ratioSection.childElementCount;
+  let numRadiiInput = radiiSection.childElementCount - 1;
+  let numRatioInput = ratioSection.childElementCount - 1;
 
   while (numRadiiInput !== numRotors) {
     if (radiiSection.childElementCount > numRotors) {
@@ -91,24 +124,22 @@ numRotorsEl.addEventListener("input", () => {
       let labelText = document.createElement('span');
       let radiusInput = document.createElement('input');
 
-      labelText.innerHTML = `radius${numRadiiInput + 1}`;
+      labelText.innerHTML = `rd${numRadiiInput + 1}`;
       radiusInput.type = "number";
+      radiusInput.classList.add("radius-input");
       radiusInput.id = `radius${numRadiiInput + 1}`;
       radiusLabel.appendChild(labelText);
       radiusLabel.appendChild(radiusInput);
       radiiSection.appendChild(radiusLabel);
       numRadiiInput += 1;
 
-      // <label>
-      //   text<input id="text" />
-      // </label>
-
       let ratioLabel = document.createElement('label');
       let ratioText = document.createElement('span');
       let ratioInput = document.createElement('input');
 
-      ratioText.innerHTML = `ratio${numRatioInput + 1}`;
+      ratioText.innerHTML = `rt${numRatioInput + 1}`;
       ratioInput.type = "number";
+      ratioInput.classList.add("ratio-input");
       ratioInput.id = `ratio${numRatioInput + 1}`;
       ratioLabel.appendChild(ratioText);
       ratioLabel.appendChild(ratioInput);
@@ -118,17 +149,33 @@ numRotorsEl.addEventListener("input", () => {
   }
 });
 
-// Clear Button listener 
-document.getElementById("clear-button")
-  .addEventListener("click", () => {
-    // Stop animation 
-    if (animationFrameId) {
-      window.cancelAnimationFrame(window.animationFrameId);
-    }
-    window.stopAnimation = true;
+document.getElementById("draw-mode-radio").addEventListener("click", () => {
+  document.getElementById("animation-section").classList.toggle("hide");
+  document.getElementById("draw-section").classList.toggle("hide");
+});
 
-    // Clear canvas
-    // clearCanvas();
+document.getElementById("animation-mode-radio").addEventListener("click", () => {
+  document.getElementById("animation-section").classList.toggle("hide");
+  document.getElementById("draw-section").classList.toggle("hide");
+});
+
+
+// Animation Button listeners 
+document.getElementById("animation-play-button").addEventListener("click", () => {
+  window.stopAnimation = false;
+  drawOnCanvas(true);
+});
+
+document.getElementById("animation-clear-button")
+  .addEventListener("click", () => {
+    stopAnimation();
+    clearCanvas();
+  }
+);
+
+document.getElementById("animation-pause-button")
+  .addEventListener("click", () => {
+    stopAnimation();
   }
 );
 
@@ -137,8 +184,9 @@ document.getElementById("draw-button").addEventListener("click", () => {
   drawOnCanvas();
 });
 
-// Animate Button Listener 
-document.getElementById("animate-button").addEventListener("click", () => {
-  window.stopAnimation = false;
-  drawOnCanvas(true);
-});
+document.getElementById("draw-clear-button")
+  .addEventListener("click", () => {
+    stopAnimation();
+    clearCanvas();
+  }
+);

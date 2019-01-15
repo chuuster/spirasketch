@@ -51,7 +51,7 @@ export class Spirograph {
     ctx.moveTo(this.cx + this.sumRadii(), this.cy);
 
     // Draw segments from theta = 0 to thetaLimit
-    for (theta = 0; theta <= this.thetaLimit; theta += 0.01) {
+    for (theta = 0; theta < this.thetaLimit + 0.01; theta += 0.01) {
       let offset = this.xyOffset(theta);
       x = this.cx + offset[0];
       y = this.cy + offset[1];
@@ -64,7 +64,6 @@ export class Spirograph {
 
   animateSpirograph() {
     if (!window.stopAnimation) {
-
       if (this.thetaLimit <= 2 * Math.PI) {
         clearCanvas();
         this.thetaLimit += 0.01;

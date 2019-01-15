@@ -1,51 +1,14 @@
 html {
-  font-family: sans-serif;
+  font-family:'Roboto', sans-serif;
+  font-size: 16px;
 }
 
-#canvas {
-
+.hide {
+  display: none;
 }
 
 #canvas:focus {
   outline: none;
-}
-
-#options-button {
-  font-size: 20px;
-}
-
-#options-section {
-  min-width: 200px;
-  position: absolute;
-  right: 0px;
-}
-
-#options-pane {
-  display: none;
-  max-height: 90vh;
-  overflow: auto;
-  color: white;
-  background: rgba(0,0,0,0.5);
-  padding: 15px;
-}
-
-#options-section .show {
-  display: flex;
-  flex-direction: column;
-}
-
-#options-pane .show {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-#options-pane section {
-  border-top: 1px solid whitesmoke;
-}
-
-#options-pane > :first-child {
-  border-top: none;
 }
 
 .column-flex {
@@ -60,6 +23,70 @@ html {
   justify-content: space-around;
 }
 
+/* Overall Structure */
+#options-section {
+  width: 300px;
+  position: absolute;
+  right: 30px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+#options-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#options-button {
+  text-align: center;
+  background: white;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+#options-pane #logo-container {
+  font-family: 'Staatliches', cursive;
+  text-align: center;
+  font-size: 45px;
+  padding-top: 5px;
+}
+
+#scroll-container {
+  display: none;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+}
+
+#options-pane-container {
+  max-height: 90vh;
+  overflow: auto;
+}
+
+#options-pane {
+  color: white;
+  background: rgba(0,0,0,0.5);
+  padding: 15px 15px 30px 15px;
+}
+
+#options-pane section,
+#advanced-options-section section {
+  border-top: 1px solid whitesmoke;
+  padding: 15px;
+}
+
+#options-pane > :first-child, 
+#advanced-options-section > :first-child {
+  border-top: none;
+}
+
+
+
 .randomize-button {
   width: 80%;
   border: 2px solid darkgrey;
@@ -69,17 +96,24 @@ html {
   text-align: center;
 }
 
-.randomize-button:hover, .anidraw-button:hover {
+.randomize-button:hover, .anidraw-button:hover,
+#options-button:hover {
   cursor: pointer;
-  background: darkgrey;
+  background: rgba(0,0,0,0.2);
 }
 
 .section-header-span {
-  margin: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .section-end {
   margin: 10px;
+  width: 100%;
+}
+
+label {
+  vertical-align: middle;
 }
 
 .anidraw-button {
@@ -90,12 +124,12 @@ html {
   text-align: center;
 }
 
+input[type="number"] {
+  width: 80px;
+}
 
-
-
-#radii-section, #ratio-section {
-  display: flex;
-  flex-direction: column;
+label span {
+  margin: 5px;
 }
 
 #radii-section label, #ratio-section label {
