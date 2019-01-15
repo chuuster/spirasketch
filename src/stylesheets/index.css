@@ -3,7 +3,6 @@ html {
 }
 
 #canvas {
-  background: pink;
 }
 
 #canvas:focus {
@@ -35,4 +34,12 @@ html {
 #options-section .show {
   display: flex;
   flex-direction: column;
+}
+
+#draw-button, #clear-button {
+  background: rgba(0,0,0,0.9);
+}
+
+#draw-button:hover, #clear-button:hover {
+  cursor: pointer;
 }

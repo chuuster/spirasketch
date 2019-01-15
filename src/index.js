@@ -1,14 +1,13 @@
-import { Spirograph } from "./point";
+import { numRotorsEl } from "./options";
+import { Spirograph } from "./spiro";
+
+export const canvasEl = document.getElementById("canvas");
+export const ctx = canvasEl.getContext("2d");
+export const clearCanvas = () => {
+  ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+};
 
 const windowDimensions = { "height": window.innerHeight, "width": window.innerWidth };
-const canvasEl = document.getElementById("canvas");
-const ctx = canvasEl.getContext("2d");
-
-export function clearCanvas() {
-  ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-}
-
-const numRotorsEl = document.getElementById("num-rotors");
 
 // Set Up Canvas 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,69 +15,46 @@ document.addEventListener("DOMContentLoaded", () => {
   canvasEl.setAttribute("height", windowDimensions.height * window.devicePixelRatio);
 });
 
+// Function to draw on canvas
 
-// Randomize spirograph on click 
-canvasEl.addEventListener("click", () => {
-  let numRadii = numRotorsEl.value;
+export const drawOnCanvas = (animate = false) => {
+  clearCanvas();
+
   let radii = [];
-
-  for(let i = 0; i < numRadii; i++) {
-    radii.push(Math.floor(Math.random() * canvasEl.height / (2*numRadii + 1)) + 20);
+  for (let i = 1; i <= parseInt(numRotorsEl.value); i++) {
+    radii.push(parseInt(document.getElementById(`radius${i}`).value));
   }
 
   let spiro = new Spirograph({
-    ctx: ctx,
-    cx: (canvasEl.width / 2),
-    cy: (canvasEl.height / 2),
     radii: radii,
-    ratio1: Math.floor(Math.random() * 10000000000),
-    ratio2: Math.floor(Math.random() * 10000000000),
-    thetaLimit: 2 * Math.PI
+    ratio: parseInt(document.getElementById("ratio").value)
   });
 
-  console.log(spiro);
-  clearCanvas();
-  spiro.drawSpirograph();
-  document.getElementById("num-rotors").value = "4";
+  if (animate === true) {
+    console.log("animate");
+    spiro.thetaLimit = 0;
+    spiro.animateSpirograph();
+  } else {
+    spiro.thetaLimit = 2 * Math.PI;
+    spiro.drawSpirograph();
+  }
+};
+
+// Randomize spirograph on click 
+canvasEl.addEventListener("click", () => {
+  
+  // Fill out form element with randomized values 
+  numRotorsEl.value = Math.floor(Math.random() * 9) + 2;
   numRotorsEl.dispatchEvent(new Event("input"));
-
-
-  for(let i = 1; i <= numRadii; i++) {
-    document.getElementById(`radius${i}`).value = spiro.radii[i-1];
+  
+  let numRadii = parseInt(numRotorsEl.value);
+  
+  for (let i = 1; i <= numRadii; i++) {
+    document.getElementById(`radius${i}`).value = Math.floor(Math.random() * canvasEl.height / (2 * numRadii) + 10);
   }
+  
+  document.getElementById("ratio").value = Math.floor(Math.random() * 10000000);
 
-  document.getElementById("ratio1").value = spiro.ratio1;
-  document.getElementById("ratio2").value = spiro.ratio2;
-});
-
-
-// Options Display Toggle 
-
-const optionsButton = document.getElementById("options-button");
-const optionsPane = document.getElementById("options-pane");
-
-optionsButton.addEventListener("click", () => {
-  optionsPane.classList.toggle("show");
-});
-
-// Options Display Radii 
-
-numRotorsEl.addEventListener("input", () => {
-  let radiiSection = document.getElementById("radii-section");
-  let numRotors = parseInt(numRotorsEl.value);
-
-  while (radiiSection.hasChildNodes()) {
-    radiiSection.removeChild(radiiSection.lastChild);
-  }
-
-  for(let i = 1; i <= numRotors; i++) {
-    let radiusLabel = document.createElement('label');
-    let labelText = document.createTextNode(`radius${i}`);
-    let radiusInput = document.createElement('input');
-    radiusInput.type = "number";
-    radiusInput.id = `radius${i}`;
-    radiusLabel.appendChild(labelText);
-    radiusLabel.appendChild(radiusInput);
-    radiiSection.appendChild(radiusLabel);
-  }
+  // Draw on canvas 
+  drawOnCanvas();
 });
