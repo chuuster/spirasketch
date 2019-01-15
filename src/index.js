@@ -11,7 +11,7 @@ const numRotorsEl = document.getElementById("num-rotors");
 
 // Set Up Canvas 
 document.addEventListener("DOMContentLoaded", () => {
-  canvasEl.setAttribute("width", windowDimensions.width * window.devicePixelRatio);
+  canvasEl.setAttribute("width", (windowDimensions.width * window.devicePixelRatio) - 300);
   canvasEl.setAttribute("height", windowDimensions.height * window.devicePixelRatio);
 });
 
@@ -94,16 +94,6 @@ randomComplex.addEventListener("click", () => {
   randomize({ minRotor: 4, maxRotor: 9, maxRatio: 100000000});
 });
 
-
-// Options Display Toggle 
-
-const optionsButton = document.getElementById("options-button");
-const optionsPane = document.getElementById("scroll-container");
-
-optionsButton.addEventListener("click", () => {
-  optionsPane.classList.toggle("show");
-});
-
 // Options -- Dynamically Create HTML Elements 
 
 numRotorsEl.addEventListener("input", () => {
@@ -157,6 +147,18 @@ document.getElementById("draw-mode-radio").addEventListener("click", () => {
 document.getElementById("animation-mode-radio").addEventListener("click", () => {
   document.getElementById("animation-section").classList.toggle("hide");
   document.getElementById("draw-section").classList.toggle("hide");
+});
+
+document.getElementById("show-adv-options").addEventListener("click", () => {
+  document.getElementById("show-adv-options").classList.toggle("hide");
+  document.getElementById("hide-adv-options").classList.toggle("hide");
+  document.getElementById("advanced-options-section").classList.toggle("hide");
+});
+
+document.getElementById("hide-adv-options").addEventListener("click", () => {
+  document.getElementById("show-adv-options").classList.toggle("hide");
+  document.getElementById("hide-adv-options").classList.toggle("hide");
+  document.getElementById("advanced-options-section").classList.toggle("hide");
 });
 
 

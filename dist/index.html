@@ -9,16 +9,13 @@
 
   <body>
     <div id="app-container">
-      <div id="options-section">        
-        <div id="options-button-container">
-          <div id="options-button">Options</div>
-        </div>
-        <div id="scroll-container">
+        <canvas id="canvas"></canvas>
+      <div id="scroll-container">
         <div id=options-pane-container>
           <div id="options-pane">
-            <section id="logo-container">
+            <div id="logo-container">
               <span>SpiraSketch</span>
-            </section>
+            </div>
 
             <section class="column-flex" id="randomize-buttons-section">
               <div class="randomize-button" id="randomize-simple-button">Randomize! (simple)</div>
@@ -27,7 +24,6 @@
             </section>
 
             <section class="column-flex" id="mode-section">
-              <span class="section-header-span">Mode:</span>
               <div class="row-flex section-end" id="mode-options-section">
                 <label>
                   <input type="radio" id="draw-mode-radio" name="mode" value="draw" />
@@ -41,6 +37,7 @@
             </section>
               
             <section class="column-flex" id="animation-section">
+              <span>Animation Controls</span>
               <div class="row-flex" id="anidraw-button-section">
                 <div class="anidraw-button" id="animation-play-button">Play</div>
                 <div class="anidraw-button" id="animation-pause-button">Pause</div>
@@ -52,36 +49,47 @@
               </label>
             </section>
 
-            <section class="row-flex hide" id="draw-section">
-              <div class="anidraw-button" id="draw-button">Draw</div>
-              <div class="anidraw-button" id="draw-clear-button">Clear</div>
+            <section class="column-flex hide" id="draw-section">
+              <span>Drawing Controls</span>
+              <div class="row-flex">
+                <div class="anidraw-button" id="draw-button">Draw</div>
+                <div class="anidraw-button" id="draw-clear-button">Clear</div>
+              </div>
             </section>
             
-            <span>Show Advanced Options</span>
-            <section id="advanced-options-section">
-              <section id="num-rotors-section">
+            <div id="show-adv-options">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
+                <path d="m40.4 121.3c-0.8 0.8-1.8 1.2-2.9 1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z" /></svg>
+              Show Advanced Options
+            </div>
+            <div id="hide-adv-options" class="hide">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
+                <path d="m121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c0.8 0.8 1.8 1.2 2.9 1.2 1 0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" /></svg>
+              Hide Advanced Options
+            </div>
+            <section class="hide" id="advanced-options-section">
+              <div id="num-rotors-section">
                 <label>
                   <span>Number of Rotors</span>
                   <input id="num-rotors" type="number" min="1" max="9"/>
                 </label>
-              </section>
+              </div>
               
-              <section class="row-flex" id="ratio-radii-section">
+              <div class="row-flex" id="ratio-radii-section">
                 <div class="column-flex" id="radii-section">
                   <span>Radius</span>
                 </div>  
                 <div class="column-flex" id="ratio-section">
                   <span>Ratio</span>
                 </div>
-              </section>
+              </div>
             </section>
           </div>
         </div>
       </div>
-      </div>
-      </div>
+      
 
-      <canvas id="canvas"></canvas>
+      </div>
     </div>
   </body>
   <script type="application/javascript" src="./main.js"></script>
