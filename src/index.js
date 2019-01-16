@@ -33,7 +33,6 @@ export const drawOnCanvas = (animate = false) => {
   });
 
   if (animate === true) {
-    console.log("animate");
     spiro.thetaLimit = 0;
     spiro.animateSpirograph();
   } else {
