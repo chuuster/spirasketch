@@ -78,7 +78,7 @@ let randomComplex = document.getElementById("randomize-complex-button");
 randomSimple.addEventListener("click", () => {
   stopAnimation();
   clearCanvas();
-  randomize({minRotor: 2, maxRotor: 6, maxRatio: 8});
+  randomize({minRotor: 2, maxRotor: 5, maxRatio: 6});
 });
 
 randomSpiral.addEventListener("click", () => {  
