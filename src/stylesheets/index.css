@@ -63,8 +63,7 @@ html {
   padding: 15px 15px 30px 15px;
 }
 
-#options-pane section,
-#advanced-options-section section {
+#options-pane section {
   border-bottom: 1px solid whitesmoke;
   padding: 15px;
 }
@@ -107,6 +106,10 @@ label {
 
 
 /* Advanced Options Section  */
+#advanced-options-section {
+  color: ghostwhite;
+  font-size: 14px;
+}
 
 #show-adv-options, 
 #hide-adv-options {
@@ -126,8 +129,13 @@ input[type="number"] {
   width: 70px;
 }
 
+#num-rotors-section {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px 30px 0px;
+}
+
 #radii-section label, #ratio-section label {
   margin-top: 15px;
-  display: flex;
-  justify-items: space-between;
+  vertical-align: middle;
 }

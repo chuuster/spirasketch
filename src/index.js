@@ -114,7 +114,7 @@ numRotorsEl.addEventListener("input", () => {
       let labelText = document.createElement('span');
       let radiusInput = document.createElement('input');
 
-      labelText.innerHTML = `rd${numRadiiInput + 1}`;
+      labelText.innerHTML = `rd${numRadiiInput + 1} `;
       radiusInput.type = "number";
       radiusInput.classList.add("radius-input");
       radiusInput.id = `radius${numRadiiInput + 1}`;
@@ -127,7 +127,7 @@ numRotorsEl.addEventListener("input", () => {
       let ratioText = document.createElement('span');
       let ratioInput = document.createElement('input');
 
-      ratioText.innerHTML = `rt${numRatioInput + 1}`;
+      ratioText.innerHTML = `rt${numRatioInput + 1} `;
       ratioInput.type = "number";
       ratioInput.classList.add("ratio-input");
       ratioInput.id = `ratio${numRatioInput + 1}`;
