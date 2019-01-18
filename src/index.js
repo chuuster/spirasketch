@@ -11,8 +11,8 @@ const numRotorsEl = document.getElementById("num-rotors");
 
 // Set Up Canvas 
 document.addEventListener("DOMContentLoaded", () => {
-  canvasEl.setAttribute("width", (windowDimensions.width * window.devicePixelRatio) - 300);
-  canvasEl.setAttribute("height", windowDimensions.height * window.devicePixelRatio);
+  canvasEl.setAttribute("width", (windowDimensions.width) - 300);
+  canvasEl.setAttribute("height", windowDimensions.height);
 });
 
 // Function to draw on canvas
