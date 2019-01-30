@@ -3,11 +3,34 @@ html {
   font-size: 16px;
 }
 
-#draw-section.hide,
-#animation-section.hide,
-#advanced-options-section.hide,
-#show-adv-options.hide,
-#hide-adv-options.hide {
+#instruction-modal {
+  position: absolute;
+  top:0px;
+  bottom: 0px;
+  left:0px;
+  right: 0px;
+  background: rgb(0,0,0,0.5);
+  color: white;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#instruction-modal section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 10px 50px 50px 50px;
+  text-shadow: 1px 1px 2px black;
+  background: rgb(0,0,0,0.3);
+}
+
+#instruction-modal.hide {
   display: none;
 }
 
@@ -44,7 +67,8 @@ html {
   background: rgba(0,0,0,0.8);
 }
 
-#logo-container {
+#logo-container, #instruction-modal h1 {
+  font-weight: 400;
   font-family: 'Staatliches', cursive;
   text-align: center;
   font-size: 45px;
@@ -87,8 +111,9 @@ html {
 }
 
 section span {
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
 }
 
 .section-end {
@@ -100,42 +125,43 @@ section span {
   font-size: 16px;
 }
 
-label {
-  vertical-align: middle;
-}
-
 
 /* Advanced Options Section  */
 #advanced-options-section {
   color: ghostwhite;
-  font-size: 14px;
+  font-size: 14px;  
 }
 
-#show-adv-options, 
-#hide-adv-options {
-  font-size: 14px;
-  text-align: right;
-  color: darkgray;
-  margin-top: 10px;
+label {
+  vertical-align: middle;
 }
 
-svg {
-  height: 12px;
-  width: 12px;
-  fill: white;
+label span {
+  margin-right: 5px;
+}
+
+#ratio-radii-section {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 35px;
 }
 
 input[type="number"] {
   width: 70px;
 }
 
-#num-rotors-section {
+#num-rotors-section label {
   display: flex;
   justify-content: center;
-  padding: 20px 0px 30px 0px;
+  padding: 10px 0px 30px 0px;
+}
+
+#num-rotors-section input {
+  width: 50px;
 }
 
 #radii-section label, #ratio-section label {
+  display: flex;
   margin-top: 15px;
-  vertical-align: middle;
+  margin-right: 15px;
 }

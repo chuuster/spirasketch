@@ -13,6 +13,13 @@ const numRotorsEl = document.getElementById("num-rotors");
 document.addEventListener("DOMContentLoaded", () => {
   canvasEl.setAttribute("width", (windowDimensions.width) - 300);
   canvasEl.setAttribute("height", windowDimensions.height);
+  randomize({ minRotor:2, maxRotor:4, maxRatio: 6 });
+});
+
+// Modal Close 
+let modal = document.getElementById("instruction-modal");
+  modal.addEventListener("click", () => {
+  modal.classList.add("hide");
 });
 
 // Function to draw on canvas
@@ -63,7 +70,7 @@ const randomize = ({minRotor, maxRotor, maxRatio}) => {
   }
 
   // Draw on canvas 
-  if (document.getElementById("draw-mode-radio").checked) {
+  if (!document.getElementById("animation-mode-radio").checked) {
     drawOnCanvas();
   } else {
     window.stopAnimation = false;
@@ -113,7 +120,7 @@ numRotorsEl.addEventListener("input", () => {
       let labelText = document.createElement('span');
       let radiusInput = document.createElement('input');
 
-      labelText.innerHTML = `rd${numRadiiInput + 1} `;
+      labelText.innerHTML = `rd${numRadiiInput + 1}`;
       radiusInput.type = "number";
       radiusInput.classList.add("radius-input");
       radiusInput.id = `radius${numRadiiInput + 1}`;
@@ -126,7 +133,7 @@ numRotorsEl.addEventListener("input", () => {
       let ratioText = document.createElement('span');
       let ratioInput = document.createElement('input');
 
-      ratioText.innerHTML = `rt${numRatioInput + 1} `;
+      ratioText.innerHTML = `rt${numRatioInput + 1}`;
       ratioInput.type = "number";
       ratioInput.classList.add("ratio-input");
       ratioInput.id = `ratio${numRatioInput + 1}`;
@@ -138,51 +145,21 @@ numRotorsEl.addEventListener("input", () => {
   }
 });
 
-document.getElementById("draw-mode-radio").addEventListener("click", () => {
-  document.getElementById("animation-section").classList.toggle("hide");
-  document.getElementById("draw-section").classList.toggle("hide");
-});
-
 document.getElementById("animation-mode-radio").addEventListener("click", () => {
   document.getElementById("animation-section").classList.toggle("hide");
   document.getElementById("draw-section").classList.toggle("hide");
 });
 
-document.getElementById("show-adv-options").addEventListener("click", () => {
-  document.getElementById("show-adv-options").classList.toggle("hide");
-  document.getElementById("hide-adv-options").classList.toggle("hide");
-  document.getElementById("advanced-options-section").classList.toggle("hide");
-});
-
-document.getElementById("hide-adv-options").addEventListener("click", () => {
-  document.getElementById("show-adv-options").classList.toggle("hide");
-  document.getElementById("hide-adv-options").classList.toggle("hide");
-  document.getElementById("advanced-options-section").classList.toggle("hide");
-});
-
-
-// Animation Button listeners 
-document.getElementById("animation-play-button").addEventListener("click", () => {
-  window.stopAnimation = false;
-  drawOnCanvas(true);
-});
-
-document.getElementById("animation-clear-button")
-  .addEventListener("click", () => {
-    stopAnimation();
-    clearCanvas();
-  }
-);
-
-document.getElementById("animation-pause-button")
-  .addEventListener("click", () => {
-    stopAnimation();
-  }
-);
-
 // Draw Button listener 
 document.getElementById("draw-button").addEventListener("click", () => {
-  drawOnCanvas();
+  if (!document.getElementById("animation-mode-radio").checked) {
+    stopAnimation();
+    clearCanvas();
+    drawOnCanvas();
+  } else {
+    window.stopAnimation = false;
+    drawOnCanvas(true);
+  }
 });
 
 document.getElementById("draw-clear-button")
