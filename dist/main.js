@@ -254,10 +254,6 @@ numRotorsEl.addEventListener("input", function () {
       numRatioInput += 1;
     }
   }
-});
-document.getElementById("animation-mode-radio").addEventListener("click", function () {
-  document.getElementById("animation-section").classList.toggle("hide");
-  document.getElementById("draw-section").classList.toggle("hide");
 }); // Draw Button listener 
 
 document.getElementById("draw-button").addEventListener("click", function () {

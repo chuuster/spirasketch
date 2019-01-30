@@ -145,11 +145,6 @@ numRotorsEl.addEventListener("input", () => {
   }
 });
 
-document.getElementById("animation-mode-radio").addEventListener("click", () => {
-  document.getElementById("animation-section").classList.toggle("hide");
-  document.getElementById("draw-section").classList.toggle("hide");
-});
-
 // Draw Button listener 
 document.getElementById("draw-button").addEventListener("click", () => {
   if (!document.getElementById("animation-mode-radio").checked) {
