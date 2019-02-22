@@ -13,7 +13,7 @@ const numRotorsEl = document.getElementById("num-rotors");
 document.addEventListener("DOMContentLoaded", () => {
   canvasEl.setAttribute("width", (windowDimensions.width) - 300);
   canvasEl.setAttribute("height", windowDimensions.height);
-  randomize({ minRotor:2, maxRotor:4, maxRatio: 6 });
+  // randomize({ minRotor:2, maxRotor:4, maxRatio: 6 });
 });
 
 // Modal Close 
@@ -24,7 +24,7 @@ let modal = document.getElementById("instruction-modal");
 
 // Function to draw on canvas
 
-export const drawOnCanvas = (animate = false) => {
+export const drawOnCanvas = (animate = false, spinner = true) => {
   clearCanvas();
 
   let radii = [];
@@ -39,9 +39,9 @@ export const drawOnCanvas = (animate = false) => {
     ratio: ratio
   });
 
-  if (animate === true) {
+  if (animate) {
     spiro.thetaLimit = 0;
-    spiro.animateSpirograph();
+    spiro.animateSpirograph(spinner);
   } else {
     spiro.thetaLimit = 2 * Math.PI;
     window.stopAnimation = false;
@@ -74,7 +74,7 @@ const randomize = ({minRotor, maxRotor, maxRatio}) => {
     drawOnCanvas();
   } else {
     window.stopAnimation = false;
-    drawOnCanvas(true);
+    drawOnCanvas(true, false);
   }
 };
 
@@ -153,7 +153,7 @@ document.getElementById("draw-button").addEventListener("click", () => {
     drawOnCanvas();
   } else {
     window.stopAnimation = false;
-    drawOnCanvas(true);
+    drawOnCanvas(true, false);
   }
 });
 

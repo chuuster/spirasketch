@@ -114,12 +114,7 @@ var numRotorsEl = document.getElementById("num-rotors"); // Set Up Canvas
 
 document.addEventListener("DOMContentLoaded", function () {
   canvasEl.setAttribute("width", windowDimensions.width - 300);
-  canvasEl.setAttribute("height", windowDimensions.height);
-  randomize({
-    minRotor: 2,
-    maxRotor: 4,
-    maxRatio: 6
-  });
+  canvasEl.setAttribute("height", windowDimensions.height); // randomize({ minRotor:2, maxRotor:4, maxRatio: 6 });
 }); // Modal Close 
 
 var modal = document.getElementById("instruction-modal");
@@ -129,6 +124,7 @@ modal.addEventListener("click", function () {
 
 var drawOnCanvas = function drawOnCanvas() {
   var animate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var spinner = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   clearCanvas();
   var radii = [];
   var ratio = [];
@@ -143,9 +139,9 @@ var drawOnCanvas = function drawOnCanvas() {
     ratio: ratio
   });
 
-  if (animate === true) {
+  if (animate) {
     spiro.thetaLimit = 0;
-    spiro.animateSpirograph();
+    spiro.animateSpirograph(spinner);
   } else {
     spiro.thetaLimit = 2 * Math.PI;
     window.stopAnimation = false;
@@ -181,7 +177,7 @@ var randomize = function randomize(_ref) {
     drawOnCanvas();
   } else {
     window.stopAnimation = false;
-    drawOnCanvas(true);
+    drawOnCanvas(true, false);
   }
 };
 
@@ -263,7 +259,7 @@ document.getElementById("draw-button").addEventListener("click", function () {
     drawOnCanvas();
   } else {
     window.stopAnimation = false;
-    drawOnCanvas(true);
+    drawOnCanvas(true, false);
   }
 });
 document.getElementById("draw-clear-button").addEventListener("click", function () {
@@ -415,14 +411,19 @@ function () {
   }, {
     key: "animateSpirograph",
     value: function animateSpirograph() {
+      var spinner = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
       if (!window.stopAnimation) {
         if (this.thetaLimit <= 2 * Math.PI) {
           Object(_index__WEBPACK_IMPORTED_MODULE_0__["clearCanvas"])();
           this.thetaLimit += Math.PI / 180;
           this.drawSpirograph();
-          this.createSpinners().forEach(function (spinner) {
-            spinner.drawSpinner();
-          });
+
+          if (spinner) {
+            this.createSpinners().forEach(function (spinner) {
+              spinner.drawSpinner();
+            });
+          }
         }
 
         window.animationFrameId = window.requestAnimationFrame(this.animateSpirograph);

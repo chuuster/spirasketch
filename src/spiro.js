@@ -62,15 +62,17 @@ export class Spirograph {
     ctx.stroke();
   }
 
-  animateSpirograph() {
+  animateSpirograph(spinner=true) {
     if (!window.stopAnimation) {
       if (this.thetaLimit <= 2 * Math.PI) {
         clearCanvas();
         this.thetaLimit += Math.PI / 180;
         this.drawSpirograph();
-        this.createSpinners().forEach((spinner) => {
-          spinner.drawSpinner();
-        });
+        if (spinner) {
+          this.createSpinners().forEach((spinner) => {
+            spinner.drawSpinner();
+          });
+        }
       }
       
       window.animationFrameId = window.requestAnimationFrame(this.animateSpirograph);
